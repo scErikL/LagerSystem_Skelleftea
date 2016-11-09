@@ -23,9 +23,15 @@ namespace LagerSystem_Skelleftea.Repositories
             return ctx.Items.OrderBy(i=>i.Name);
         }
 
-        public IEnumerable<StockItem> SortItemsByCol(string sortCol)
+        public IEnumerable<StockItem> SortItemsByCol(string search, string sortCol)
         {
-            var lista = ctx.Items.AsEnumerable().OrderBy(o=>o.GetType().GetProperty(sortCol).GetValue(o,null));
+            IEnumerable<StockItem> lista;
+            if (search != "") {
+                lista = ctx.Items.Where(i => i.Name.Contains(search) || i.Price.ToString().Contains(search));
+            }
+            else { 
+                lista = ctx.Items.AsEnumerable().OrderBy(o=>o.GetType().GetProperty(sortCol).GetValue(o,null));
+            }
             return lista;
         }
 

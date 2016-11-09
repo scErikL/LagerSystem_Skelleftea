@@ -13,17 +13,17 @@ namespace LagerSystem_Skelleftea.Controllers
         private ItemRepository repo = new ItemRepository();
         
         // GET: Items
-        public ActionResult Index(string sort = "Name")
+        public ActionResult Index(string Search="", string sort = "Name")
         {
-            return View(repo.SortItemsByCol(sort));
+            return View(repo.SortItemsByCol(Search, sort));
         }
 
-        //GET:
+        /*GET:
         public ActionResult Sort(string sort="Name")
         {
             return View(repo.SortItemsByCol(sort));
 
-        }
+        }*/
         
         //GET: Create Item
         [HttpGet]
